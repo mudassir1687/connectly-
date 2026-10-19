@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connectly</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d12;color:#f5f5fa;font:15px Arial,sans-serif}
+header{padding:18px;background:#171722;border-bottom:1px solid #333;font-size:24px;font-weight:bold;color:#b99aff}
+main{max-width:650px;margin:auto;padding:16px}
+.card{background:#191922;border:1px solid #343441;border-radius:14px;padding:16px;margin:14px 0}
+input,textarea,button{font:inherit;border-radius:9px;padding:12px;margin:5px 0;width:100%}
+input,textarea{background:#101018;color:white;border:1px solid #414151}
+textarea{resize:vertical}
+button{background:#a78bfa;color:#151020;border:0;font-weight:bold;cursor:pointer}
+button.secondary{background:#30303d;color:white}
+button:disabled{opacity:.5}
+.small{font-size:13px;color:#aaa}
+.hidden{display:none!important}
+.row{display:flex;gap:8px}
+.row button{flex:1}
+.post{white-space:pre-wrap;overflow-wrap:anywhere}
+#status{color:#d6c8ff}
+a{color:#c5adff}
+</style>
+</head>
+<body>
+<header>✦ Connectly</header>
+<main>
+<div class="card">
+  <b>Welcome to Connectly</b>
+  <p class="small">Sign in, share posts and connect with friends.</p>
+  <p id="status">Connecting to Firebase...</p>
+</div>
+
+<section id="auth" class="card">
+  <h3>Create account / Login</h3>
+  <input id="email" type="email" placeholder="Email address" autocomplete="email">
+  <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password">
+  <div class="row">
+    <button id="signup">Sign up</button>
+    <button id="login" class="secondary">Log in</button>
+  </div>
+  <button id="google" class="secondary">Continue with Google</button>
+</section>
+
+<section id="profile" class="card hidden">
+  <h3>Your profile</h3>
+  <p class="small">Username: 3–20 letters, numbers or underscores.</p>
+  <input id="username" placeholder="Choose a unique username">
+  <input id="displayName" placeholder="Display name (optional)" maxlength="40">
+  <button id="saveProfile">Save username</button>
+  <button id="logout" class="secondary">Log out</button>
+</section>
+
+<section id="social" class="hidden">
+  <div class="card">
+    <h3>Find people</h3>
+    <input id="search" placeholder="Search exact username">
+    <button id="searchBtn">Search</button>
+    <div id="searchResults"></div>
+  </div>
+
+  <div class="card">
+    <h3>Messages</h3>
+    <p class="small">Enter the exact username of a Connectly user.</p>
+    <input id="chatUser" placeholder="Friend's username">
+    <button id="openChat">Open conversation</button>
+    <div id="chatBox" class="hidden">
+      <p id="chatTitle" class="small"></p>
+      <div id="messages" style="max-height:300px;overflow:auto"></div>
+      <textarea id="messageText" maxlength="2000" placeholder="Write a message..."></textarea>
+      <button id="sendMessage">Send message</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Create a post</h3>
+    <textarea id="postText" maxlength="2000" placeholder="What's on your mind?"></textarea>
+    <button id="createPost">Publish post</button>
+  </div>
+  <section id="feedBox" class="card">
+    <h3>Latest posts</h3>
+    <div id="feed">Loading posts...</div>
+  </section>
+</section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBMgdqEMqA6H29VnGz6IAkyyMYPwdYL2pc",
+  authDomain: "connectly-37c0e.firebaseapp.com",
+  projectId: "connectly-37c0e",
+  storageBucket: "connectly-37c0e.firebasestorage.app",
+  messagingSenderId: "1001935844056",
+  appId: "1:1001935844056:web:353ac1fb57b52001be1dad",
+  measurementId: "G-S1LVJX8KSV"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+const $ = id => document.getElementById(id);
+let me = null, myProfile = null, activeChat = null, stopMessages = null;
+const say = msg => $("status").textContent = msg;
+const cleanUsername = s => s.trim().toLowerCase();
+const validUsername = s => /^[a-z0-9_]{3,20}$/.test(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const timeText = ts => ts && ts.toDate ? ts.toDate().toLocaleString() : "Just now";
+
+$("signup").onclick = async () => {
+  try {
+    await auth.createUserWithEmailAndPassword($("email").value.trim(), $("password").value);
+  } catch(e) { say(e.message); }
+};
+$("login").onclick = async () => {
+  try {
+    await auth.signInWithEmailAndPassword($("email").value.trim(), $("password").value);
+  } catch(e) { say(e.message); }
+};
+$("google").onclick = async () => {
+  try {
+    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  } catch(e) { say("Google login: " + e.message); }
+};
+$("logout").onclick = () => auth.signOut();
+
+auth.onAuthStateChanged(async user => {
+  me = user;
+  $("auth").classList.toggle("hidden", !!user);
+  $("profile").classList.toggle("hidden", !user);
+  $("social").classList.toggle("hidden", !user);
+  if (!user) {
+    myProfile = null;
+    say("Please sign in or create an account.");
+    $("feed").textContent = "Sign in to see posts.";
+    if (stopMessages) stopMessages();
+    return;
+  }
+  try {
+    const snap = await db.collection("users").doc(user.uid).get();
+    myProfile = snap.exists ? snap.data() : null;
+    $("username").value = myProfile?.username || "";
+    $("displayName").value = myProfile?.displayName || "";
+    say("Signed in as " + (user.email || user.uid));
+    loadFeed();
+  } catch(e) { say("Profile error: " + e.message); }
+});
+
+$("saveProfile").onclick = async () => {
+  if (!me) return;
+  const username = cleanUsername($("username").value);
+  const displayName = $("displayName").value.trim().slice(0,40);
+  if (!validUsername(username)) {
+    say("Username must be 3–20 characters: a-z, 0-9 or underscore.");
+    return;
+  }
+  try {
+    await db.runTransaction(async tx => {
+      const userRef = db.collection("users").doc(me.uid);
+      const newNameRef = db.collection("usernames").doc(username);
+      const current = await tx.get(userRef);
+      const nameSnap = await tx.get(newNameRef);
+      if (nameSnap.exists && nameSnap.data().uid !== me.uid)
+        throw new Error("Username already taken. Try another.");
+      const oldName = current.exists ? current.data().username : null;
+      if (oldName && oldName !== username) {
+        const oldRef = db.collection("usernames").doc(oldName);
+        tx.delete(oldRef);
+      }
+      tx.set(newNameRef, {uid: me.uid});
+      tx.set(userRef, {
+        username, displayName, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, {merge:true});
+    });
+    const snap = await db.collection("users").doc(me.uid).get();
+    myProfile = snap.data();
+    say("Profile saved! Your username is @" + username);
+  } catch(e) { say(e.message); }
+};
+
+$("searchBtn").onclick = async () => {
+  const name = cleanUsername($("search").value);
+  $("searchResults").textContent = "Searching...";
+  if (!validUsername(name)) {
+    $("searchResults").textContent = "Enter a valid exact username.";
+    return;
+  }
+  try {
+    const s = await db.collection("usernames").doc(name).get();
+    if (!s.exists) { $("searchResults").textContent = "User not found."; return; }
+    const p = await db.collection("users").doc(s.data().uid).get();
+    const u = p.data() || {};
+    $("searchResults").innerHTML =
+      "<p><b>@" + esc(u.username) + "</b> " + esc(u.displayName || "") + "</p>";
+  } catch(e) { $("searchResults").textContent = e.message; }
+};
+
+$("createPost").onclick = async () => {
+  if (!me || !myProfile?.username) {
+    say("Save your username first.");
+    return;
+  }
+  const text = $("postText").value.trim();
+  if (!text) { say("Write something first."); return; }
+  try {
+    await db.collection("posts").add({
+      uid: me.uid, username: myProfile.username,
+      text, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("postText").value = "";
+    say("Post published!");
+    loadFeed();
+  } catch(e) { say("Could not publish: " + e.message); }
+};
+
+async function loadFeed() {
+  if (!me) return;
+  try {
+    const snap = await db.collection("posts").orderBy("createdAt","desc").limit(50).get();
+    const feed = $("feed");
+    feed.replaceChildren();
+    if (snap.empty) { feed.textContent = "No posts yet. Be the first!"; return; }
+    snap.forEach(doc => {
+      const p = doc.data(), id = doc.id;
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = "<b>@" + esc(p.username) + "</b><p class='small'>" +
+        esc(timeText(p.createdAt)) + "</p><p class='post'>" + esc(p.text) +
+        "</p><button class='secondary like'>♥ Like (" + (p.likesCount || 0) +
+        ")</button><div class='comments'></div><input class='commentText' maxlength='500' placeholder='Write a comment'><button class='secondary commentBtn'>Comment</button>";
+      card.querySelector(".like").onclick = async () => {
+        try {
+          const ref = db.collection("posts").doc(id);
+          const likeRef = ref.collection("likes").doc(me.uid);
+          await db.runTransaction(async tx => {
+            const s = await tx.get(likeRef);
+            const postSnap = await tx.get(ref);
+            if (!postSnap.exists) return;
+            const n = postSnap.data().likesCount || 0;
+            if (s.exists) { tx.delete(likeRef); tx.update(ref,{likesCount:Math.max(0,n-1)}); }
+            else { tx.set(likeRef,{uid:me.uid}); tx.update(ref,{likesCount:n+1}); }
+          });
+          loadFeed();
+        } catch(e) { say("Like failed: " + e.message); }
+      };
+      card.querySelector(".commentBtn").onclick = async () => {
+        const input = card.querySelector(".commentText");
+        const text = input.value.trim();
+        if (!text) return;
+        try {
+          await db.collection("posts").doc(id).collection("comments").add({
+            uid:me.uid, username:myProfile?.username || me.email || "user",
+            text, createdAt:firebase.firestore.FieldValue.serverTimestamp()
+          });
+          input.value = "";
+          showComments(id,card.querySelector(".comments"));
+        } catch(e) { say("Comment failed: " + e.message); }
+      };
+      feed.appendChild(card);
+      showComments(id,card.querySelector(".comments"));
+    });
+  } catch(e) { $("feed").textContent = "Feed error: " + e.message; }
+}
+
+async function showComments(postId, box) {
+  try {
+    const snap = await db.collection("posts").doc(postId)
+      .collection("comments").orderBy("createdAt","asc").limit(30).get();
+    box.replaceChildren();
+    snap.forEach(d => {
+      const c = d.data(), p = document.createElement("p");
+      p.className = "small";
+      p.textContent = "@" + (c.username || "user") + ": " + c.text;
+      box.appendChild(p);
+    });
+  } catch(e) { /* Security rules may not be configured yet. */ }
+}
+
+$("openChat").onclick = async () => {
+  if (!me || !myProfile?.username) { say("Save your username first."); return; }
+  const targetName = cleanUsername($("chatUser").value);
+  if (!validUsername(targetName)) { say("Enter a valid username."); return; }
+  try {
+    const s = await db.collection("usernames").doc(targetName).get();
+    if (!s.exists) { say("User not found."); return; }
+    const targetUid = s.data().uid;
+    if (targetUid === me.uid) { say("You cannot message yourself."); return; }
+    const ids = [me.uid,targetUid].sort();
+    activeChat = ids.join("_");
+    $("chatTitle").textContent = "Chat with @" + targetName;
+    $("chatBox").classList.remove("hidden");
+    if (stopMessages) stopMessages();
+    stopMessages = db.collection("chats").doc(activeChat).collection("messages")
+      .orderBy("createdAt","asc").limit(100).onSnapshot(snap => {
+        const box = $("messages");
+        box.replaceChildren();
+        snap.forEach(d => {
+          const m = d.data(), line = document.createElement("p");
+          line.textContent = (m.uid === me.uid ? "You: " : "Friend: ") + m.text;
+          line.style.padding = "8px";
+          box.appendChild(line);
+        });
+        box.scrollTop = box.scrollHeight;
+      }, e => say("Chat error: " + e.message));
+  } catch(e) { say(e.message); }
+};
+
+$("sendMessage").onclick = async () => {
+  if (!me || !activeChat) return;
+  const text = $("messageText").value.trim();
+  if (!text) return;
+  try {
+    await db.collection("chats").doc(activeChat).collection("messages").add({
+      uid:me.uid, text, createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("messageText").value = "";
+  } catch(e) { say("Message failed: " + e.message); }
+};
+</script>
+</body>
+    </html>
+  
