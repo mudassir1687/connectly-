@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0714">
+<title>Connectly — Connect. Share. Express.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--bg:#0a0714;--card:#151027;--card2:#1c1634;--input:#1b1530;--purple:#9d4edd;--glow:#c084fc;--text:#f8fafc;--muted:#a49ab8;--line:#34234e;--pink:#ec4899}
+*{box-sizing:border-box}body{margin:0;background:#05030a;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}.app{max-width:460px;min-height:100dvh;margin:auto;background:radial-gradient(ellipse at top,#1d1032 0,#0a0714 40%);position:relative;padding-bottom:82px}.hidden{display:none!important}.header{height:66px;position:sticky;top:0;z-index:5;background:#0a0714ed;backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px}.brand{font-size:22px;font-weight:800;letter-spacing:-.7px;background:linear-gradient(110deg,#fff,#c084fc);color:transparent;background-clip:text}.brand i{color:#c084fc;margin-right:8px}.iconbtn{border:0;background:transparent;color:#eee;font-size:20px;padding:8px}.auth{min-height:100dvh;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:34px 25px;text-align:center;background:radial-gradient(circle at 50% 25%,#35134e 0,#0a0714 68%)}.logo{font-size:60px;color:#c084fc;filter:drop-shadow(0 0 18px #9333ea88);margin-bottom:12px}.auth h1{font-size:34px;margin:0 0 6px;font-weight:800}.sub{color:var(--muted);margin:0 0 26px}.authform{width:100%;max-width:370px}.field{position:relative;margin:12px 0}.field i{position:absolute;left:16px;top:17px;color:#a99cbd}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:15px;background:var(--input);color:white;padding:15px 15px 15px 45px;outline:none}.field select{appearance:none;color-scheme:dark}.field select option{background:#1b1530;color:white}.field input:focus{border-color:var(--glow);box-shadow:0 0 0 3px #a855f722}.primary{border:0;border-radius:15px;background:linear-gradient(135deg,#b45cff,#7135d7);color:white;font-weight:800;padding:15px 18px;box-shadow:0 8px 24px #7c3aed44}.primary:disabled{opacity:.55}.wide{width:100%;margin-top:8px}.notice{width:100%;max-width:370px;padding:12px;border-radius:12px;margin:0 0 12px;text-align:left;font-size:13px;background:#ef44441a;color:#fda4af;border:1px solid #fb718533;overflow-wrap:anywhere}.divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin:20px 0}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.socials{display:flex;justify-content:center;gap:12px}.social{height:48px;width:48px;border-radius:50%;border:1px solid #ffffff22;background:white;color:#222;font-size:19px}.switch{font-size:13px;color:var(--muted);margin-top:23px}.link{color:var(--glow);font-weight:800;margin-left:5px;cursor:pointer}.screen{padding:18px 15px 20px}.stories{display:flex;gap:14px;overflow:auto;padding:2px 0 18px}.story{min-width:62px;text-align:center;font-size:11px;color:var(--muted)}.ring{width:60px;height:60px;padding:3px;border-radius:50%;margin:0 auto 6px;background:linear-gradient(135deg,#ec4899,#8b5cf6,#60a5fa)}.ring img{width:100%;height:100%;border:2px solid var(--bg);border-radius:50%;object-fit:cover}.ring.add{display:grid;place-items:center;color:white;font-size:26px}.composer,.post,.panel,.person,.chatrow{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:14px;margin-bottom:14px}.composerline{display:flex;gap:10px;align-items:center}.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#8b5cf6,#ec4899);font-weight:800;flex-shrink:0;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.composer input,.search input,.chatinput input,.panel input,.panel textarea{min-width:0;width:100%;background:var(--input);color:white;border:1px solid var(--line);border-radius:12px;padding:12px;outline:none}.composer input{flex:1}.smallbtn{border:0;border-radius:12px;background:var(--primary);color:white;padding:11px 13px;font-weight:700}.posthead,.person{display:flex;align-items:center;gap:10px}.posthead{margin-bottom:12px}.postname{font-size:13px;font-weight:800}.handle{font-size:11px;color:var(--muted);margin-top:3px}.postmedia{display:block;width:100%;max-height:480px;object-fit:contain;border-radius:14px;margin-top:12px;background:#080510}.compose-tools{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}.toolbtn{border:1px solid var(--line);background:var(--card2);color:#e9d5ff;border-radius:12px;padding:9px 12px;font-size:12px;font-weight:700}.preview{display:block;max-width:100%;max-height:220px;border-radius:12px;margin-top:10px}.posttext{font-size:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.postactions{display:flex;gap:20px;padding-top:14px;color:var(--muted);font-size:13px}.postactions button{border:0;background:none;color:inherit;padding:0}.postactions .liked{color:var(--pink)}.search{margin-bottom:15px}.person{margin-bottom:10px}.person .grow{flex:1;min-width:0}.person .name{font-size:13px;font-weight:800}.person .handle{overflow-wrap:anywhere}.sectiontitle{font-size:19px;margin:4px 0 16px}.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:460px;width:100%;height:72px;background:#100b1eef;backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:6}.navbtn{border:0;background:none;color:#958aa9;font-size:20px;padding:12px}.navbtn.active{color:var(--glow)}.navadd{width:46px;height:46px;border:0;border-radius:16px;background:linear-gradient(135deg,#b45cff,#7135d7);color:white;font-size:21px}.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%);background:#211637;color:#ffffff;border:1px solid #8b5cf6;padding:11px 15px;border-radius:12px;font-size:13px;font-weight:700;z-index:20;max-width:90%;box-shadow:0 8px 30px #0008}.profilebanner{height:100px;border-radius:16px 16px 0 0;background:radial-gradient(circle at 80% 25%,#ec489966,transparent 40%),linear-gradient(135deg,#4c1d95,#1e123a)}.profilebody{padding:0 16px 18px}.profilebody .avatar{width:78px;height:78px;border:4px solid var(--card);margin-top:-39px;margin-bottom:10px}.stats{display:flex;justify-content:space-around;background:var(--card2);padding:13px;border-radius:13px;margin:16px 0}.stats div{text-align:center}.stats strong{display:block}.stats small{color:var(--muted);font-size:11px}.muted{color:var(--muted)}.chatview{height:calc(100dvh - 185px);display:flex;flex-direction:column}.chathead{display:flex;gap:10px;align-items:center;padding-bottom:13px;border-bottom:1px solid var(--line)}.messages{flex:1;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:14px 0}.bubble{max-width:82%;padding:11px 14px;border-radius:18px;background:var(--card2);font-size:13px;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:linear-gradient(135deg,#9333ea,#6d28d9);border-bottom-right-radius:5px}.bubble.theirs{align-self:flex-start;border-bottom-left-radius:5px}.chatinput{display:flex;gap:8px}.chatinput input{flex:1}.chatphoto{max-width:220px;max-height:260px;display:block;border-radius:12px;margin-top:8px}.empty{text-align:center;color:var(--muted);padding:28px 10px;font-size:13px}.footnote{font-size:11px;color:var(--muted);line-height:1.5;margin-top:18px}
+.social.google-only{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 16px;border-radius:12px;font:inherit;font-weight:700;cursor:pointer}
+
+.dialogback{position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:22px;z-index:100}.dialog{width:100%;max-width:390px;background:#171126;border:1px solid #493364;border-radius:22px;padding:22px;box-shadow:0 22px 70px #000b}.dialog h3{margin:0 0 8px;font-size:19px}.dialog p{color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap}.dialog input,.dialog textarea,.dialog select{width:100%;margin:8px 0 14px;background:#0f0a1b;color:#fff;border:1px solid #493364;border-radius:12px;padding:13px;outline:none}.dialog textarea{min-height:105px;resize:vertical}.dialogactions{display:flex;gap:10px;justify-content:flex-end}.dialogactions button{border:1px solid #493364;border-radius:12px;padding:11px 15px;background:#241936;color:#fff}.dialogactions .primary{background:linear-gradient(135deg,#b45cff,#7135d7);border:0}
+
+.postcomments{padding:0 14px 14px;display:flex;flex-direction:column;gap:7px}.comment-row{font-size:13px;line-height:1.45;overflow-wrap:anywhere;color:var(--text,#eee)}.comment-row strong{font-weight:700;margin-right:5px}.no-comments,.comments-loading{font-size:12px;color:var(--muted,#999);padding:2px 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <section id="authView" class="auth">
+    <div class="logo"><i class="fa-solid fa-heart"></i></div>
+    <h1>Connectly</h1><p class="sub">Connect. Share. Express.</p>
+    <div id="authNotice" class="notice hidden" role="alert"></div>
+    <div class="authform">
+      <div id="nameField" class="field hidden"><i class="fa-regular fa-user"></i><input id="fullName" autocomplete="name" placeholder="Full name" maxlength="60"></div>
+      <div id="usernameField" class="field hidden"><i class="fa-solid fa-at"></i><input id="newUsername" autocomplete="username" placeholder="Username (e.g. mudassir_07)" maxlength="20" autocapitalize="none"></div>
+      <div id="genderField" class="field hidden"><i class="fa-solid fa-venus-mars"></i><select id="gender"><option value="">Gender (optional)</option><option value="Woman">Woman</option><option value="Man">Man</option><option value="Custom">Custom</option><option value="Prefer not to say">Prefer not to say</option></select></div>
+      <div class="field"><i class="fa-regular fa-envelope"></i><input id="email" type="email" autocomplete="email" placeholder="Email address"></div>
+      <div class="field"><i class="fa-solid fa-lock"></i><input id="password" type="password" autocomplete="current-password" placeholder="Password (6+ characters)"></div>
+      <button id="authSubmit" class="primary wide" onclick="submitAuth()">Sign In</button>
+      <div class="divider">OR CONTINUE WITH</div>
+      <div class="socials">
+        <button class="social google-only" aria-label="Continue with Google" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335"></i><span>Continue with Google</span></button>
+      </div>
+      <div class="switch"><span id="switchText">New to Connectly?</span><span id="switchButton" class="link" onclick="toggleAuthMode()">Create account</span></div>
+      <p class="footnote">By continuing, you agree to use Connectly respectfully. Connect with people, share moments, and be yourself.</p>
+    </div>
+  </section>
+
+  <section id="appView" class="hidden">
+    <header class="header"><div class="brand"><i class="fa-solid fa-heart"></i>Connectly</div><div><button class="iconbtn" aria-label="Messages" onclick="navigate('messages')"><i class="fa-regular fa-paper-plane"></i></button><button class="iconbtn" aria-label="Settings" onclick="navigate('settings')"><i class="fa-solid fa-gear"></i></button></div></header>
+    <main id="feedScreen" class="screen">
+      <div class="stories" id="storiesStrip"><button class="story" onclick="createStory()"><div class="ring add">+</div>Your story</button></div>
+      <input id="storyImageInput" type="file" accept="image/*" class="hidden" onchange="uploadStory(event)">
+      <div class="composer"><div class="composerline"><div class="avatar" id="composerAvatar">C</div><input id="postText" maxlength="2000" placeholder="Share a thought or moment…"><button class="smallbtn" onclick="createPost()">Share</button></div><div class="compose-tools"><button class="toolbtn" onclick="$('postImageInput').click()"><i class="fa-regular fa-image"></i> Add photo</button><span class="muted" style="font-size:11px">Share something real with your community</span></div><input id="postImageInput" type="file" accept="image/*" class="hidden" onchange="previewPostImage(event)"><img id="postImagePreview" class="preview hidden" alt="Photo preview"><button id="clearPostImage" class="toolbtn hidden" onclick="clearPostImage()">Remove photo</button></div>
+      <div class="search"><input id="feedSearch" placeholder="Search posts, captions or @username…" oninput="renderFeed()" aria-label="Search posts"></div>
+      <div id="feedList"><div class="empty">Sign in to load your feed.</div></div>
+    </main>
+    <section id="exploreScreen" class="screen hidden"><div class="search"><input id="peopleSearch" placeholder="Search people by name or @username" oninput="filterPeople()"></div><div id="peopleResults"></div></section>
+    <section id="messagesScreen" class="screen hidden">
+      <div id="chatContactsWrap"><h2 class="sectiontitle">Messages</h2><div class="muted" style="font-size:13px;margin-bottom:14px">Your conversations will appear here. Visit Explore and tap Message on someone to start a chat.</div><div id="chatContacts"></div></div>
+      <div id="chatActiveWindow" class="chatview hidden"><div class="chathead"><button class="iconbtn" onclick="closeActiveChat()"><i class="fa-solid fa-arrow-left"></i></button><div class="avatar" id="chatAvatar">U</div><div style="flex:1"><strong id="chatName">User</strong><div class="muted" id="chatHandle" style="font-size:11px"></div></div></div><div class="messages" id="messageStream"></div><input id="chatPhotoInput" type="file" accept="image/*" class="hidden" onchange="sendChatPhoto(event)"><div class="chatinput"><button class="toolbtn" aria-label="Send photo" onclick="$('chatPhotoInput').click()"><i class="fa-regular fa-image"></i></button><input id="chatMessageInput" maxlength="4000" placeholder="Message…" onkeydown="if(event.key==='Enter')sendMessage()"><button class="primary" aria-label="Send message" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button></div></div>
+    </section>
+    <section id="profileScreen" class="screen hidden">
+      <div class="panel" style="padding:0;overflow:hidden"><div class="profilebanner"></div><div class="profilebody"><div class="avatar" id="profileAvatar">C</div><h2 id="profileDisplayName">Your profile</h2><div id="profileHandle" class="muted" style="font-size:12px;margin-top:5px">@username</div><p id="profileBioText" style="font-size:13px;line-height:1.5;margin-top:12px">Connect. Share. Express.</p><div class="stats"><div><strong id="profilePostCount">0</strong><small>Posts</small></div><div><strong id="profileFollowers">0</strong><small>Followers</small></div><div><strong id="profileFollowing">0</strong><small>Following</small></div></div><button class="primary wide" onclick="editProfile()">Edit profile</button><button class="toolbtn wide" onclick="changeProfilePhoto()">Change profile photo</button><button class="toolbtn wide" onclick="showSavedPosts()">Saved posts</button></div></div>
+      <div class="panel"><button class="toolbtn" onclick="navigate('settings')"><i class="fa-solid fa-gear"></i> Settings and activity</button></div>
+    </section>
+    <section id="settingsScreen" class="screen hidden">
+      <button class="toolbtn" onclick="navigate('profile')"><i class="fa-solid fa-arrow-left"></i> Back to profile</button>
+      <h2 class="sectiontitle" style="margin-top:18px">Settings and activity</h2>
+      <div class="panel"><strong>Account</strong><p class="muted" style="font-size:12px">Manage your Connectly profile and sign-in.</p>
+        <button class="toolbtn wide" onclick="editProfile()">Edit profile</button>
+        <button class="toolbtn wide" onclick="togglePrivateAccount()">Toggle private account</button>
+        <button class="toolbtn wide" onclick="showSavedPosts()">Saved posts</button>
+        <button class="toolbtn wide" onclick="switchAccount()">Switch account</button>
+        <button class="toolbtn wide" onclick="changePassword()">Change password</button>
+      </div>
+      <div class="panel"><strong>Privacy and safety</strong>
+        <button class="toolbtn wide" onclick="togglePrivateAccount()">Account privacy: toggle private/public</button>
+        <button class="toolbtn wide" onclick="showBlockedUsers()">Blocked accounts</button>
+        <button class="toolbtn wide" onclick="reportIssue()">Report a problem</button>
+        <button class="toolbtn wide" onclick="showAbout()">About Connectly</button>
+      </div>
+      <div id="ownerAdminPanel" class="panel hidden"><strong><i class="fa-solid fa-shield-halved"></i> Owner Admin</strong><p class="muted" style="font-size:12px">Owner-only moderation tools.</p><button class="toolbtn wide" onclick="loadAdminUsers()">Manage users</button><button class="toolbtn wide" onclick="loadAdminReports()">Review reports</button><div id="adminResults"></div></div>
+      <div class="panel"><button class="toolbtn wide" onclick="signOutUser()" style="color:#fb7185"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</button></div>
+      <p class="footnote">Keep your account details private and never share your password.</p>
+    </section>
+    <nav class="bottom">
+      <button id="nav-feed" class="navbtn active" aria-label="Home" onclick="navigate('feed')"><i class="fa-solid fa-house"></i></button>
+      <button id="nav-explore" class="navbtn" aria-label="Explore" onclick="navigate('explore')"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="navadd" aria-label="Create post" onclick="navigate('feed');setTimeout(()=>document.getElementById('postText').focus(),100)"><i class="fa-solid fa-plus"></i></button>
+      <button id="nav-messages" class="navbtn" aria-label="Messages" onclick="navigate('messages')"><i class="fa-regular fa-paper-plane"></i></button>
+      <button id="nav-profile" class="navbtn" aria-label="Profile" onclick="navigate('profile')"><i class="fa-regular fa-user"></i></button>
+    </nav>
+  </section>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <div id="appDialogBack" class="dialogback hidden" role="dialog" aria-modal="true"><div class="dialog"><h3 id="appDialogTitle">Connectly</h3><p id="appDialogMessage" class="hidden"></p><div id="appDialogFields"></div><div class="dialogactions"><button id="appDialogCancel" type="button">Cancel</button><button id="appDialogOk" type="button" class="primary">Save</button></div></div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const CONNECTLY_OWNER_UID = '58GR7Xtjhcg34S6PvwH2qQzPlRJ3';
+const firebaseConfig = {
+  apiKey: "AIzaSyBMgdqEMqA6H29VnGz6IAkyyMYPwdYL2pc",
+  authDomain: "connectly-37c0e.firebaseapp.com",
+  projectId: "connectly-37c0e",
+  storageBucket: "connectly-37c0e.firebasestorage.app",
+  messagingSenderId: "1001935844056",
+  appId: "1:1001935844056:web:353ac1fb57b52001be1dad"
+};
+let auth, db, currentUser=null, currentProfile=null, authMode='login', activeScreen='feed', activeChat=null;
+let feedUnsub=null, peopleUnsub=null, messagesUnsub=null, feedCache=[], peopleCache=[], selectedPostImage='';
+const $ = id => document.getElementById(id);
+let toastTimer;
+function toast(message){const el=$('toast');el.textContent=message;el.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),3500)}
+function appPrompt(title, initial='', opts={}){return new Promise(resolve=>{const back=$('appDialogBack'),field=$('appDialogFields');$('appDialogTitle').textContent=title;$('appDialogMessage').classList.add('hidden');field.innerHTML='';const input=document.createElement(opts.multiline?'textarea':'input');input.value=initial||'';input.maxLength=opts.maxLength||1000;input.placeholder=opts.placeholder||'';field.appendChild(input);$('appDialogOk').textContent=opts.okText||'Save';$('appDialogCancel').textContent='Cancel';back.classList.remove('hidden');input.focus();let done=false;const finish=v=>{if(done)return;done=true;back.classList.add('hidden');$('appDialogOk').removeEventListener('click',yes);$('appDialogCancel').removeEventListener('click',no);back.removeEventListener('click',outside);resolve(v)};const yes=()=>finish(input.value);const no=()=>finish(null);const outside=e=>{if(e.target===back)no()};$('appDialogOk').addEventListener('click',yes);$('appDialogCancel').addEventListener('click',no);back.addEventListener('click',outside);});}
+function appConfirm(message,title='Are you sure?'){return new Promise(resolve=>{const back=$('appDialogBack');$('appDialogTitle').textContent=title;$('appDialogMessage').textContent=message;$('appDialogMessage').classList.remove('hidden');$('appDialogFields').innerHTML='';$('appDialogOk').textContent='Continue';$('appDialogCancel').textContent='Cancel';back.classList.remove('hidden');let done=false;const finish=v=>{if(done)return;done=true;back.classList.add('hidden');$('appDialogOk').removeEventListener('click',yes);$('appDialogCancel').removeEventListener('click',no);back.removeEventListener('click',outside);resolve(v)};const yes=()=>finish(true),no=()=>finish(false),outside=e=>{if(e.target===back)no()};$('appDialogOk').addEventListener('click',yes);$('appDialogCancel').addEventListener('click',no);back.addEventListener('click',outside);});}
+
+function showAuthError(message){const el=$('authNotice');el.textContent=message;el.classList.remove('hidden')}
+function clearAuthError(){$('authNotice').textContent='';$('authNotice').classList.add('hidden')}
+function setBusy(busy){$('authSubmit').disabled=busy;$('authSubmit').textContent=busy?'Please wait…':(authMode==='login'?'Sign In':'Create account')}
+function friendlyError(error){
+  const code=error&&error.code||'';
+  const map={
+    'auth/invalid-email':'Please enter a valid email address.',
+    'auth/missing-password':'Please enter your password.',
+    'auth/weak-password':'Use a password with at least 6 characters.',
+    'auth/email-already-in-use':'An account with this email already exists. Try signing in.',
+    'auth/invalid-credential':'Email or password is incorrect. If you are new, create an account first.',
+    'auth/user-not-found':'No account found for this email. Choose Create account.',
+    'auth/wrong-password':'Email or password is incorrect.',
+    'auth/too-many-requests':'Too many attempts. Wait a while and try again.',
+    'auth/popup-blocked':'The Google sign-in window was blocked. Try again or use email sign-in.',
+    'auth/popup-closed-by-user':'Google sign-in was closed before finishing.',
+    'auth/unauthorized-domain':'This website domain is not authorized in Firebase Authentication.',
+    'auth/network-request-failed':'Network error. Check internet/VPN and try again.',
+    'auth/operation-not-allowed':'This sign-in method is not enabled in Firebase.',
+    'auth/account-exists-with-different-credential':'This email already uses another sign-in method. Sign in with that method first.'
+  };
+  return map[code]||((error&&error.message)||'Something went wrong. Please try again.');
+}
+function toggleAuthMode(){
+  authMode=authMode==='login'?'signup':'login';
+  $('nameField').classList.toggle('hidden',authMode==='login');
+  $('usernameField').classList.toggle('hidden',authMode==='login');
+  $('genderField').classList.toggle('hidden',authMode==='login');
+  $('switchText').textContent=authMode==='login'?'New to Connectly?':'Already have an account?';
+  $('switchButton').textContent=authMode==='login'?'Create account':'Sign in';
+  $('password').autocomplete=authMode==='login'?'current-password':'new-password';
+  clearAuthError();setBusy(false);
+}
+async function submitAuth(){
+  clearAuthError();
+  const email=$('email').value.trim(), password=$('password').value, name=$('fullName').value.trim(), username=$('newUsername').value.trim().toLowerCase(), gender=$('gender').value;
+  if(!auth){showAuthError('Could not connect right now. Check your internet connection and reload.');return}
+  if(!email){showAuthError('Please enter your email address.');return}
+  if(!password){showAuthError('Please enter your password.');return}
+  if(authMode==='signup'&&password.length<6){showAuthError('Password must be at least 6 characters.');return}
+  setBusy(true);
+  try{
+    if(authMode==='signup'){
+      if(!name){showAuthError('Please enter your full name.');return}
+      if(!/^[a-z0-9._]{3,20}$/.test(username)){showAuthError('Username must be 3–20 characters: letters, numbers, dots or underscores.');return}
+      const existing=await db.collection('users').where('username','==',username).limit(1).get();
+      if(!existing.empty){showAuthError('That username is taken. Please choose another.');return}
+      const cred=await auth.createUserWithEmailAndPassword(email,password);
+      await saveProfile(cred.user,{displayName:name,username,gender});
+      toast('Account created. Welcome to Connectly!');
+    }else{
+      await auth.signInWithEmailAndPassword(email,password);
+    }
+  }catch(e){showAuthError(friendlyError(e))}
+  finally{setBusy(false)}
+}
+async function googleSignIn(){
+  clearAuthError();
+  if(!auth){showAuthError('Firebase did not load. Check your internet connection and reload.');return}
+  try{
+    const provider=new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    await auth.signInWithRedirect(provider);
+  }catch(e){showAuthError(friendlyError(e))}
+}
+function saveProfile(user, extra={}){
+  const ref=db.collection('users').doc(user.uid);
+  return ref.get().then(snap=>{
+    const old=snap.exists?snap.data():{};
+    const displayName=extra.displayName||old.displayName||user.displayName||((user.email||'user').split('@')[0]);
+    const username=extra.username||old.username||makeUsername(displayName,user.uid);
+    return ref.set({uid:user.uid,email:user.email||'',displayName,username,gender:extra.gender||old.gender||'',photoURL:user.photoURL||old.photoURL||'',bio:old.bio||'Connect. Share. Express.',createdAt:old.createdAt||firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+  });
+}
+function makeUsername(name,uid){return (String(name||'user').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,16)||'user')+'_'+uid.slice(0,5).toLowerCase()}
+function avatarHTML(profile){if(profile&&profile.photoURL)return '<img alt="" src="'+escapeHTML(profile.photoURL)+'">';return escapeHTML((profile&&profile.displayName||'U').slice(0,1).toUpperCase())}
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function showApp(){
+  $('authView').classList.add('hidden');$('appView').classList.remove('hidden');
+  $('ownerAdminPanel').classList.toggle('hidden', !currentUser || currentUser.uid !== CONNECTLY_OWNER_UID);
+  updateProfileUI();navigate('feed');startFeed();startPeople();renderContacts();loadStories();
+}
+function updateProfileUI(){
+  if(!currentProfile)return;
+  $('composerAvatar').innerHTML=avatarHTML(currentProfile);$('profileAvatar').innerHTML=avatarHTML(currentProfile);
+  $('profileDisplayName').textContent=currentProfile.displayName||'User';
+  $('profileHandle').textContent='@'+(currentProfile.username||'user');
+  $('profileBioText').textContent=currentProfile.bio||'Connect. Share. Express.';
+  $('profilePostCount').textContent=feedCache.filter(p=>p.uid===currentUser.uid).length;
+}
+function navigate(screen){
+  activeScreen=screen;
+  ['feed','explore','messages','profile','settings'].forEach(name=>{
+    const section=$(name==='feed'?'feedScreen':name==='explore'?'exploreScreen':name==='messages'?'messagesScreen':name==='settings'?'settingsScreen':'profileScreen');
+    section.classList.toggle('hidden',name!==screen);
+    const nav=$('nav-'+name);if(nav)nav.classList.toggle('active',name===screen);
+  });
+  if(screen==='profile')updateProfileUI();if(screen==='messages')renderContacts();
+}
+function startFeed(){
+  if(feedUnsub)feedUnsub();
+  feedUnsub=db.collection('posts').orderBy('createdAt','desc').limit(50).onSnapshot(snap=>{
+    feedCache=snap.docs.map(d=>({id:d.id,...d.data()}));renderFeed();updateProfileUI();
+  },e=>{console.error(e);$('feedList').innerHTML='<div class="empty">Could not load posts. Check Firestore rules.</div>'});
+}
+function renderFeed(){
+  const query=(($('feedSearch')&&$('feedSearch').value)||'').trim().toLowerCase().replace(/^@/,'');
+  const visiblePosts=feedCache.filter(post=>!query||[post.text,post.displayName,post.username].some(v=>String(v||'').toLowerCase().includes(query)));
+  if(!visiblePosts.length){$('feedList').innerHTML=`<div class="empty">${query?'No posts match your search.':'No posts yet. Be the first to share something 💜'}</div>`;return}
+  $('feedList').innerHTML=visiblePosts.map(post=>{
+    const liked=Array.isArray(post.likes)&&post.likes.includes(currentUser.uid);
+    const ownPost=post.uid===currentUser.uid;
+    return `<article class="post"><div class="posthead"><div class="avatar">${escapeHTML((post.displayName||'U').slice(0,1).toUpperCase())}</div><div style="flex:1;min-width:0"><div class="postname">${escapeHTML(post.displayName||'User')}</div><div class="handle">@${escapeHTML(post.username||'user')}</div></div>${ownPost?`<button class="toolbtn" onclick="editPost('${post.id}')" aria-label="Edit post">Edit</button><button class="toolbtn" onclick="deletePost('${post.id}')" aria-label="Delete post">Delete</button>`:''}</div>${post.text?`<div class="posttext">${escapeHTML(post.text)}</div>`:''}${post.imageData?`<img class="postmedia" src="${post.imageData}" alt="Post photo" loading="lazy">`:''}<div class="postactions"><button class="${liked?'liked':''}" onclick="toggleLike('${post.id}')"><i class="fa-${liked?'solid':'regular'} fa-heart"></i> ${Array.isArray(post.likes)?post.likes.length:0}</button><button onclick="addComment('${post.id}')"><i class="fa-regular fa-comment"></i> Comment</button><button onclick="savePost('${post.id}')"><i class="fa-regular fa-bookmark"></i> Save</button><button onclick="reportPost('${post.id}','${escapeHTML(post.username||'user')}')"><i class="fa-regular fa-flag"></i> Report</button></div><div class="postcomments" id="comments-${post.id}"><div class="comments-loading">Loading comments…</div></div></article>`;
+  }).join('');
+  visiblePosts.forEach(post=>loadComments(post.id));
+}
+async function editPost(postId){
+  const post=feedCache.find(p=>p.id===postId);if(!post||post.uid!==currentUser.uid)return toast('You can only edit your own posts.');
+  const text=await appPrompt('Edit your post',post.text||'',{multiline:true,maxLength:2000,placeholder:'Update your caption…',okText:'Save changes'});
+  if(text===null)return;
+  try{await db.collection('posts').doc(postId).update({text:text.trim()});toast('Post updated')}catch(e){console.error(e);toast('Could not edit post. Check Firestore rules.')}
+}
+async function deletePost(postId){
+  const post=feedCache.find(p=>p.id===postId);if(!post||post.uid!==currentUser.uid)return toast('You can only delete your own posts.');
+  if(!await appConfirm('This post will be permanently deleted.','Delete post?'))return;
+  try{await db.collection('posts').doc(postId).delete();toast('Post deleted')}catch(e){console.error(e);toast('Could not delete post. Check Firestore rules.')}
+}
+async function loadComments(postId){
+  const host=$('comments-'+postId); if(!host)return;
+  try{
+    const snap=await db.collection('posts').doc(postId).collection('comments').orderBy('createdAt','asc').limit(30).get();
+    const liveHost=$('comments-'+postId); if(!liveHost)return;
+    if(snap.empty){liveHost.innerHTML='<div class="no-comments">No comments yet.</div>';return;}
+    liveHost.innerHTML=snap.docs.map(d=>{const c=d.data();return `<div class="comment-row"><strong>${escapeHTML(c.displayName||c.username||'User')}</strong> <span>${escapeHTML(c.text||'')}</span></div>`}).join('');
+  }catch(e){console.error('Load comments failed',e);const liveHost=$('comments-'+postId);if(liveHost)liveHost.innerHTML='<div class="no-comments">Comments unavailable. Check Firestore rules.</div>';}
+}
+async function createPost(){
+  const text=$('postText').value.trim();if(!text&&!selectedPostImage)return toast('Write something or add a photo first.');
+  if(text.length>2000)return toast('Post is too long.');
+  try{await db.collection('posts').add({uid:currentUser.uid,displayName:currentProfile.displayName,username:currentProfile.username,text,imageData:selectedPostImage||'',likes:[],createdAt:firebase.firestore.FieldValue.serverTimestamp()});$('postText').value='';clearPostImage();toast('Post shared!')}
+  catch(e){toast('Could not share post. Check Firestore rules.');console.error(e)}
+}
+async function toggleLike(postId){
+  const ref=db.collection('posts').doc(postId);
+  try{let likedNow=false;await db.runTransaction(async tx=>{const snap=await tx.get(ref);if(!snap.exists)return;const data=snap.data();const likes=Array.isArray(data.likes)?data.likes:[];likedNow=!likes.includes(currentUser.uid);const next=likedNow?[...likes,currentUser.uid]:likes.filter(x=>x!==currentUser.uid);tx.update(ref,{likes:next});})}
+  catch(e){toast('Could not update like. Check Firestore rules.');console.error(e)}
+}
+function startPeople(){
+  if(peopleUnsub)peopleUnsub();
+  peopleUnsub=db.collection('users').limit(100).onSnapshot(snap=>{peopleCache=snap.docs.map(d=>({id:d.id,...d.data()})).filter(p=>p.uid!==currentUser.uid);filterPeople();},e=>{console.error(e);$('peopleResults').innerHTML='<div class="empty">Could not load people. Check Firestore rules.</div>'});
+}
+function filterPeople(){
+  const q=($('peopleSearch').value||'').trim().toLowerCase().replace(/^@/,'');
+  const list=peopleCache.filter(p=>!q||String(p.displayName||'').toLowerCase().includes(q)||String(p.username||'').toLowerCase().includes(q));
+  $('peopleResults').innerHTML=list.length?list.map(p=>`<div class="person"><div class="avatar">${avatarHTML(p)}</div><div class="grow"><div class="name">${escapeHTML(p.displayName||'User')}</div><div class="handle">@${escapeHTML(p.username||'user')}</div></div><button class="smallbtn" onclick="openChat('${p.uid}','${escapeHTML(p.displayName||'User')}','${escapeHTML(p.username||'user')}')">Message</button></div>`).join(''):'<div class="empty">No people found yet.</div>';
+}
+async function renderContacts(){
+  const root=$('chatContacts');
+  if(!currentUser||!root)return;
+  root.innerHTML='<div class="empty">Loading conversations…</div>';
+  try{
+    const snap=await db.collection('chats').where('participants','array-contains',currentUser.uid).limit(100).get();
+    const chats=snap.docs.map(d=>({id:d.id,...d.data()})).filter(c=>Array.isArray(c.participants)&&c.participants.some(uid=>uid!==currentUser.uid));
+    if(!chats.length){root.innerHTML='<div class="empty"><i class="fa-regular fa-paper-plane" style="font-size:28px;display:block;margin-bottom:10px"></i>No conversations yet.<br>Open Explore, find someone, and tap Message to start a chat.</div>';return;}
+    const rows=await Promise.all(chats.map(async c=>{
+      const uid=c.participants.find(x=>x!==currentUser.uid);let u=peopleCache.find(x=>x.uid===uid)||{};
+      if(!u.uid){try{const d=await db.collection('users').doc(uid).get();if(d.exists)u={uid,...d.data()}}catch(_){}}
+      let last='Tap to open conversation';try{const m=await db.collection('chats').doc(c.id).collection('messages').orderBy('createdAt','desc').limit(1).get();if(!m.empty){const x=m.docs[0].data();last=x.text|| (x.imageData?'📷 Photo':'Message')}}catch(_){}
+      return `<button class="person conversation-row" style="width:100%;text-align:left;background:transparent;color:inherit;border:0;cursor:pointer" onclick="openChat('${escapeHTML(uid)}','${escapeHTML(u.displayName||'User')}','${escapeHTML(u.username||'user')}')"><div class="avatar">${avatarHTML(u)}</div><div class="grow"><div class="name">${escapeHTML(u.displayName||'User')}</div><div class="handle">@${escapeHTML(u.username||'user')} · ${escapeHTML(last)}</div></div><i class="fa-regular fa-paper-plane"></i></button>`;
+    }));
+    root.innerHTML=rows.join('');
+  }catch(e){console.error(e);root.innerHTML='<div class="empty">Could not load conversations. Check Firestore rules and refresh.</div>';}
+}
+function compressImage(file,maxSize=900,quality=.72){return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith('image/'))return reject(new Error('Choose an image file.'));const reader=new FileReader();reader.onerror=()=>reject(new Error('Could not read image.'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error('Could not open image.'));img.onload=()=>{const scale=Math.min(1,maxSize/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',quality));};img.src=reader.result;};reader.readAsDataURL(file);});}
+async function previewPostImage(event){const file=event.target.files&&event.target.files[0];if(!file)return;try{selectedPostImage=await compressImage(file);$('postImagePreview').src=selectedPostImage;$('postImagePreview').classList.remove('hidden');$('clearPostImage').classList.remove('hidden');toast('Photo ready to share');}catch(e){toast(e.message||'Could not use this photo.')} }
+function clearPostImage(){selectedPostImage='';$('postImageInput').value='';$('postImagePreview').src='';$('postImagePreview').classList.add('hidden');$('clearPostImage').classList.add('hidden');}
+async function sendChatPhoto(event){const file=event.target.files&&event.target.files[0];event.target.value='';if(!file||!activeChat)return;try{const imageData=await compressImage(file,800,.65);await ensureChatDocument(activeChat);await db.collection('chats').doc(activeChat.id).collection('messages').add({senderId:currentUser.uid,recipientId:activeChat.uid,text:'',imageData,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}catch(e){toast('Photo could not be sent. Check Firestore rules or choose a smaller image.');console.error(e)}}
+function chatId(a,b){return [a,b].sort().join('_')}
+async function ensureChatDocument(chat){
+  const ref=db.collection('chats').doc(chat.id);
+  const participants=[currentUser.uid,chat.uid].sort();
+  const snap=await ref.get();
+  if(!snap.exists){
+    await ref.set({participants, createdAt:firebase.firestore.FieldValue.serverTimestamp(), updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+  } else {
+    const existing=snap.data().participants;
+    if(!Array.isArray(existing)||!existing.includes(currentUser.uid)||!existing.includes(chat.uid)) throw new Error('This chat does not have valid participants.');
+  }
+  return ref;
+}
+function openChat(uid,name,username){
+  if(!uid||uid===currentUser.uid)return toast('Choose another user to start a chat.');
+  activeChat={uid,name,username,id:chatId(currentUser.uid,uid)};
+  $('chatContactsWrap').classList.add('hidden');$('chatActiveWindow').classList.remove('hidden');
+  $('chatName').textContent=name;$('chatHandle').textContent='@'+username;$('chatAvatar').textContent=(name||'U').slice(0,1).toUpperCase();
+  $('messageStream').innerHTML='<div class="empty">Loading conversation…</div>';
+  if(messagesUnsub)messagesUnsub();
+  const selectedChat=activeChat;
+  ensureChatDocument(selectedChat).then(()=>{
+    if(!activeChat||activeChat.id!==selectedChat.id)return;
+    messagesUnsub=db.collection('chats').doc(selectedChat.id).collection('messages').orderBy('createdAt','asc').limit(100).onSnapshot(snap=>{
+      $('messageStream').innerHTML=snap.docs.map(d=>{const m=d.data();return `<div class="bubble ${m.senderId===currentUser.uid?'mine':'theirs'}">${m.text?escapeHTML(m.text):''}${m.imageData?`<img class="chatphoto" src="${m.imageData}" alt="Photo message">`:''}</div>`}).join('')||'<div class="empty">Say hello 👋</div>';$('messageStream').scrollTop=$('messageStream').scrollHeight;
+    },e=>{console.error(e);toast('Chat could not load. Check the matching Firestore rules.');});
+  }).catch(e=>{console.error(e);toast('Could not start chat. Check Firestore rules.');});
+}
+function closeActiveChat(){if(messagesUnsub)messagesUnsub();messagesUnsub=null;activeChat=null;$('chatActiveWindow').classList.add('hidden');$('chatContactsWrap').classList.remove('hidden')}
+async function sendMessage(){
+  const text=$('chatMessageInput').value.trim();if(!text||!activeChat)return;
+  const chat={...activeChat};
+  try{
+    await ensureChatDocument(chat);
+    await db.collection('chats').doc(chat.id).collection('messages').add({senderId:currentUser.uid,recipientId:chat.uid,text,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+    $('chatMessageInput').value='';
+  }catch(e){toast('Message not sent: '+(e.code==='permission-denied'?'Firestore Rules blocked it.':(e.message||'please try again.')));console.error(e)}
+}
+async function editProfile(){
+  const name=await appPrompt('Edit profile · Display name',currentProfile.displayName||'',{maxLength:60});if(name===null)return;
+  const username=await appPrompt('Edit profile · Username',currentProfile.username||'',{maxLength:20});if(username===null)return;
+  const cleanUsername=username.trim().toLowerCase();if(!/^[a-z0-9._]{3,20}$/.test(cleanUsername))return toast('Username must be 3–20 valid characters.');
+  if(cleanUsername!==(currentProfile.username||'').toLowerCase()){const match=await db.collection('users').where('username','==',cleanUsername).limit(1).get();if(!match.empty)return toast('That username is already taken.');}
+  const gender=await appPrompt('Edit profile · Gender (optional)',currentProfile.gender||'',{maxLength:40});if(gender===null)return;
+  const bio=await appPrompt('Edit profile · Bio',currentProfile.bio||'',{maxLength:180,multiline:true});if(bio===null)return;
+  const cleanName=name.trim();if(!cleanName)return toast('Name cannot be empty.');
+  const cleanGender=['Woman','Man','Custom','Prefer not to say'].includes(gender.trim())?gender.trim():'';
+  try{await db.collection('users').doc(currentUser.uid).set({displayName:cleanName,username:cleanUsername,gender:cleanGender,bio:bio.trim().slice(0,180),updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});currentProfile={...currentProfile,displayName:cleanName,username:cleanUsername,gender:cleanGender,bio:bio.trim().slice(0,180)};updateProfileUI();toast('Profile updated')}
+  catch(e){toast('Could not update profile. Check Firestore rules.');console.error(e)}
+}
+async function signOutUser(){try{await auth.signOut();toast('Signed out')}catch(e){toast(friendlyError(e))}}
+async function reportPost(postId, username){
+  const reason=await appPrompt('Report post','',{multiline:true,placeholder:'Tell us what is wrong with this post…',maxLength:300,okText:'Submit report'});
+  if(!reason||!reason.trim())return;
+  try{await db.collection('reports').add({type:'post',targetId:postId,targetUsername:username,reporterUid:currentUser.uid,reason:reason.trim().slice(0,300),status:'open',createdAt:firebase.firestore.FieldValue.serverTimestamp()});toast('Report submitted. Thank you.')}
+  catch(e){console.error(e);toast('Report could not be submitted. Check Firestore rules.')}
+}
+async function addComment(postId){
+  try{const text=await appPrompt('Add a comment','',{multiline:true,placeholder:'Write a comment…',maxLength:500,okText:'Post comment'});if(!text||!text.trim())return;
+    await db.collection('posts').doc(postId).collection('comments').add({uid:currentUser.uid,displayName:currentProfile.displayName,username:currentProfile.username,text:text.trim().slice(0,500),createdAt:firebase.firestore.FieldValue.serverTimestamp()});toast('Comment added');await loadComments(postId);
+  }catch(e){console.error(e);toast('Comment could not be added. Check Firestore rules.')}
+}
+async function switchAccount(){
+  if(await appConfirm('You will be signed out and can sign in with another account.','Switch account?'))await signOutUser();
+}
+async function changePassword(){
+  if(!currentUser||!currentUser.email)return toast('Password sign-in is not available for this account.');
+  try{await auth.sendPasswordResetEmail(currentUser.email);toast('Password reset email sent to '+currentUser.email)}catch(e){toast(friendlyError(e))}
+}
+async function reportIssue(){
+  const text=await appPrompt('Report a problem','',{multiline:true,placeholder:'Describe the problem…',maxLength:1000,okText:'Send report'});if(!text||!text.trim())return;
+  try{await db.collection('reports').add({type:'app_issue',reporterUid:currentUser.uid,reason:text.trim().slice(0,1000),status:'open',createdAt:firebase.firestore.FieldValue.serverTimestamp()});toast('Problem report submitted')}
+  catch(e){console.error(e);toast('Could not submit. Check Firestore rules.')}
+}
+async function loadAdminUsers(){
+  if(!currentUser||currentUser.uid!==CONNECTLY_OWNER_UID)return toast('Owner access required.');
+  const out=$('adminResults');out.innerHTML='<div class="empty">Loading users…</div>';
+  try{const snap=await db.collection('users').limit(100).get();out.innerHTML='<h3>Users (first 100)</h3>'+ (snap.empty?'<div class="empty">No users found.</div>':snap.docs.map(d=>{const u=d.data();return `<div class="person"><div class="grow"><div class="name">${escapeHTML(u.displayName||'User')}</div><div class="handle">@${escapeHTML(u.username||'user')} · ${escapeHTML(u.email||'no email')}</div><div class="handle">UID: ${escapeHTML(d.id)}</div></div><button class="toolbtn" onclick="adminDeleteUser('${d.id}')">Delete profile</button></div>`}).join(''));}
+  catch(e){console.error(e);out.innerHTML='<div class="empty">Could not load users. Publish the matching Firestore rules.</div>'}
+}
+async function loadAdminReports(){
+  if(!currentUser||currentUser.uid!==CONNECTLY_OWNER_UID)return toast('Owner access required.');
+  const out=$('adminResults');out.innerHTML='<div class="empty">Loading reports…</div>';
+  try{const snap=await db.collection('reports').orderBy('createdAt','desc').limit(100).get();out.innerHTML='<h3>Reports (latest 100)</h3>'+ (snap.empty?'<div class="empty">No reports found.</div>':snap.docs.map(d=>{const r=d.data();return `<div class="panel"><strong>${escapeHTML(r.type||'Report')} · ${escapeHTML(r.status||'open')}</strong><p>${escapeHTML(r.reason||'No details')}</p><div class="handle">Target: ${escapeHTML(r.targetId||'not specified')} · Reporter: ${escapeHTML(r.reporterUid||'unknown')}</div><button class="toolbtn" onclick="adminResolveReport('${d.id}')">Mark reviewed</button><button class="toolbtn" onclick="adminDeleteReport('${d.id}')">Delete report</button></div>`}).join(''));}
+  catch(e){console.error(e);out.innerHTML='<div class="empty">Could not load reports. Publish the matching Firestore rules.</div>'}
+}
+async function adminResolveReport(id){if(!currentUser||currentUser.uid!==CONNECTLY_OWNER_UID)return toast('Owner access required.');try{await db.collection('reports').doc(id).update({status:'reviewed',reviewedAt:firebase.firestore.FieldValue.serverTimestamp(),reviewedBy:currentUser.uid});toast('Report marked reviewed');loadAdminReports()}catch(e){console.error(e);toast('Could not update report. Check rules.')}}
+async function adminDeleteReport(id){if(!currentUser||currentUser.uid!==CONNECTLY_OWNER_UID)return toast('Owner access required.');if(!await appConfirm('This report will be permanently deleted.','Delete report?'))return;try{await db.collection('reports').doc(id).delete();toast('Report deleted');loadAdminReports()}catch(e){console.error(e);toast('Could not delete report. Check rules.')}}
+async function adminDeleteUser(uid){if(!currentUser||currentUser.uid!==CONNECTLY_OWNER_UID)return toast('Owner access required.');if(uid===CONNECTLY_OWNER_UID)return toast('Owner profile cannot be deleted from this panel.');if(!await appConfirm('This only deletes the profile document, not the Firebase login or all content.','Delete profile?'))return;try{await db.collection('users').doc(uid).delete();toast('Profile document deleted');loadAdminUsers()}catch(e){console.error(e);toast('Could not delete profile. Check rules.')}}
+async function showBlockedUsers(){if(!currentUser)return;try{const snap=await db.collection('users').doc(currentUser.uid).collection('blocked').get();const ids=snap.docs.map(d=>d.id);if(!ids.length)return toast('You have no blocked accounts.');const id=await appPrompt('Unblock account','',{placeholder:'Enter the user UID to unblock',maxLength:128,okText:'Unblock'});if(!id)return;if(!ids.includes(id.trim()))return toast('That UID is not in your blocked list.');await db.collection('users').doc(currentUser.uid).collection('blocked').doc(id.trim()).delete();toast('User unblocked')}catch(e){console.error(e);toast('Could not load blocked users. Check Firestore rules.')}}
+async function savePost(postId){
+  if(!currentUser)return;try{const ref=db.collection('users').doc(currentUser.uid).collection('savedPosts').doc(postId);const snap=await ref.get();if(snap.exists){await ref.delete();toast('Post removed from saved')}else{await ref.set({postId,createdAt:firebase.firestore.FieldValue.serverTimestamp()});toast('Post saved')} }catch(e){console.error(e);toast('Could not save post. Check Firestore rules.')}
+}
+async function showSavedPosts(){
+ if(!currentUser)return;try{const snap=await db.collection('users').doc(currentUser.uid).collection('savedPosts').get();const ids=snap.docs.map(d=>d.id);const posts=feedCache.filter(p=>ids.includes(p.id));if(!posts.length)return toast('No saved posts in the currently loaded feed.');const out=posts.map(p=>`${p.displayName||'User'} (@${p.username||'user'}): ${p.text||'[Photo post]'}`).join('\n\n');await appPrompt('Saved posts',out,{multiline:true,okText:'Close'});}catch(e){console.error(e);toast('Could not load saved posts. Check Firestore rules.')}
+}
+async function changeProfilePhoto(){const input=document.createElement('input');input.type='file';input.accept='image/*';input.onchange=async()=>{const f=input.files&&input.files[0];if(!f)return;try{const photoURL=await compressImage(f,500,.65);await db.collection('users').doc(currentUser.uid).set({photoURL,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});currentProfile={...currentProfile,photoURL};updateProfileUI();toast('Profile photo updated')}catch(e){console.error(e);toast('Could not update photo. Try a smaller image.')}};input.click()}
+async function togglePrivateAccount(){if(!currentUser)return;const value=!currentProfile.isPrivate;try{await db.collection('users').doc(currentUser.uid).set({isPrivate:value,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});currentProfile={...currentProfile,isPrivate:value};toast(value?'Private account enabled':'Account is public');}catch(e){console.error(e);toast('Could not change privacy. Check Firestore rules.')}}
+async function createStory(){if(!currentUser)return toast('Sign in first.');$('storyImageInput').click()}
+async function uploadStory(event){const file=event.target.files&&event.target.files[0];event.target.value='';if(!file)return;try{const imageData=await compressImage(file,700,.6);await db.collection('stories').add({uid:currentUser.uid,username:currentProfile.username,displayName:currentProfile.displayName,imageData,createdAt:firebase.firestore.FieldValue.serverTimestamp(),expiresAt:Date.now()+24*60*60*1000});toast('Story shared for 24 hours');loadStories()}catch(e){console.error(e);toast('Story could not be shared. Check Firestore rules or use a smaller photo.')}}
+async function loadStories(){const strip=$('storiesStrip');if(!strip||!currentUser)return;try{const snap=await db.collection('stories').orderBy('createdAt','desc').limit(30).get();const stories=snap.docs.map(d=>({id:d.id,...d.data()})).filter(x=>!x.expiresAt||x.expiresAt>Date.now());strip.innerHTML='<button class="story" onclick="createStory()"><div class="ring add">+</div>Your story</button>'+stories.map(st=>`<button class="story" onclick="viewStory('${st.id}')"><div class="ring"><img src="${st.imageData}" alt="Story"></div>${escapeHTML(st.username||'user')}</button>`).join('')}catch(e){console.warn('Stories unavailable until rules are published',e)}}
+async function viewStory(id){
+  try{
+    const d=await db.collection('stories').doc(id).get();if(!d.exists)return toast('Story expired');const st=d.data();
+    if(st.expiresAt&&st.expiresAt<Date.now()){try{await d.ref.delete()}catch(_){}return toast('Story expired')}
+    let modal=document.getElementById('storyViewer');
+    if(!modal){modal=document.createElement('div');modal.id='storyViewer';modal.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);display:flex;align-items:center;justify-content:center;padding:18px';modal.innerHTML='<button id="storyViewerClose" aria-label="Close story" style="position:absolute;right:18px;top:18px;border:0;border-radius:50%;width:42px;height:42px;background:#25252b;color:white;font-size:24px">×</button><div style="width:min(100%,440px);height:min(82vh,760px);display:flex;flex-direction:column;gap:12px"><div id="storyViewerName" style="color:white;font-weight:700"></div><img id="storyViewerImage" alt="Story" style="width:100%;height:100%;min-height:0;object-fit:contain;border-radius:14px;background:#111"></div>';document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal||e.target.id==='storyViewerClose')modal.remove()})}
+    modal.style.display='flex';document.getElementById('storyViewerName').textContent='@'+(st.username||'user');document.getElementById('storyViewerImage').src=st.imageData||'';
+  }catch(e){console.error(e);toast('Could not open story. Check Firestore rules.')}
+}
+function showAbout(){toast('Connectly · Connect. Share. Express.')}
+function cleanupListeners(){if(feedUnsub)feedUnsub();if(peopleUnsub)peopleUnsub();if(messagesUnsub)messagesUnsub();feedUnsub=peopleUnsub=messagesUnsub=notifUnsub=null}
+function onAuthState(user){
+  currentUser=user;
+  if(!user){cleanupListeners();currentProfile=null;$('appView').classList.add('hidden');$('authView').classList.remove('hidden');return}
+  saveProfile(user).then(()=>db.collection('users').doc(user.uid).get()).then(snap=>{
+    currentProfile=snap.data()||{uid:user.uid,displayName:user.displayName||'User',username:makeUsername(user.displayName,user.uid),bio:''};
+    showApp();
+  }).catch(e=>{console.error(e);showAuthError('Signed in, but profile could not load. Check Firestore rules.');auth.signOut()});
+}
+function init(){
+  try{
+    if(!window.firebase||!firebase.initializeApp){showAuthError('Could not connect right now. Check internet and reload.');return}
+    if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+    auth=firebase.auth();db=firebase.firestore();
+    auth.getRedirectResult().catch(e=>showAuthError(friendlyError(e)));
+    auth.onAuthStateChanged(onAuthState);
+  }catch(e){console.error(e);showAuthError('Firebase could not start: '+friendlyError(e))}
+}
+window.addEventListener('load',init);
+</script>
+</body>
+</html>
