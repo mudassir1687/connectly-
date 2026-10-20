@@ -557,8 +557,8 @@ body {
 
     <div class="social-strip">
       <button class="social-round" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335"></i></button>
-      <button class="social-round" onclick="toast('Use Google sign in for best experience')"><i class="fa-brands fa-apple"></i></button>
-      <button class="social-round" onclick="toast('Use Google sign in for best experience')"><i class="fa-brands fa-facebook-f" style="color:#1877f2"></i></button>
+      <button class="social-round" onclick="toast('Please use Google Sign-in')"><i class="fa-brands fa-apple"></i></button>
+      <button class="social-round" onclick="toast('Please use Google Sign-in')"><i class="fa-brands fa-facebook-f" style="color:#1877f2"></i></button>
     </div>
 
     <div style="font-size:0.88rem;color:var(--text-muted);margin-top:14px;">
@@ -726,17 +726,20 @@ body {
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
-// Aapka connectly project ka original config
+// Exact verified Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCYoH1l5iQ7zOQ9uS_YOUR_KEY", // Note: replace with your exact Firebase API key if you regenerate it
+  apiKey: "AIzaSyBMgdqEMqA6H29VnGz6IAkyyMYPwdYL2pc",
   authDomain: "connectly-37c0e.firebaseapp.com",
   projectId: "connectly-37c0e",
-  storageBucket: "connectly-37c0e.appspot.com",
-  messagingSenderId: "508731388596",
-  appId: "1:508731388596:web:d236fbb0b22a6114ee00fd"
+  storageBucket: "connectly-37c0e.firebasestorage.app",
+  messagingSenderId: "1001935844056",
+  appId: "1:1001935844056:web:353ac1fb57b52001be1dad",
+  measurementId: "G-S1LVJX8KSV"
 };
 
 let auth = null, db = null, currentUser = null, currentProfile = null;
 let activeScreen = 'feed', authMode = 'login';
 let feedUnsub = null, usersUnsub = null, messagesUnsub = null;
-let feedCache = [], usersCache = []
+let feedCache = [], usersCache = [], activeChat = null;
+
+const $ = id => document.getE
