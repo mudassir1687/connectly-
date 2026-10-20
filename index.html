@@ -1,329 +1,773 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Connectly</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0a0714">
+<title>Connectly — Connect. Share. Express.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0d0d12;color:#f5f5fa;font:15px Arial,sans-serif}
-header{padding:18px;background:#171722;border-bottom:1px solid #333;font-size:24px;font-weight:bold;color:#b99aff}
-main{max-width:650px;margin:auto;padding:16px}
-.card{background:#191922;border:1px solid #343441;border-radius:14px;padding:16px;margin:14px 0}
-input,textarea,button{font:inherit;border-radius:9px;padding:12px;margin:5px 0;width:100%}
-input,textarea{background:#101018;color:white;border:1px solid #414151}
-textarea{resize:vertical}
-button{background:#a78bfa;color:#151020;border:0;font-weight:bold;cursor:pointer}
-button.secondary{background:#30303d;color:white}
-button:disabled{opacity:.5}
-.small{font-size:13px;color:#aaa}
-.hidden{display:none!important}
-.row{display:flex;gap:8px}
-.row button{flex:1}
-.post{white-space:pre-wrap;overflow-wrap:anywhere}
-#status{color:#d6c8ff}
-a{color:#c5adff}
+:root {
+  --bg-dark: #0a0714;
+  --bg-card: #131024;
+  --bg-card-alt: #1a1532;
+  --bg-input: #18132d;
+  --primary: #9d4edd;
+  --primary-glow: #c084fc;
+  --primary-gradient: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  --bubble-me: linear-gradient(135deg, #9333ea, #7e22ce);
+  --bubble-them: #1e1935;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-line: rgba(168, 85, 247, 0.16);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #05030a;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Mobile Frame */
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 50px rgba(124, 58, 237, 0.22);
+}
+
+.hidden { display: none !important; }
+
+/* Top Header */
+.top-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: 64px;
+  background: rgba(10, 7, 20, 0.88);
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--border-line);
+}
+
+.brand-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  background: linear-gradient(110deg, #f3e8ff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #e2e8f0;
+  font-size: 1.25rem;
+}
+
+.top-icons i {
+  cursor: pointer;
+}
+
+/* Screens Wrapper */
+.screen-content {
+  flex: 1;
+  padding: 14px 16px 95px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Auth Screen */
+.auth-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 24px;
+  background: radial-gradient(circle at 50% 28%, #2d1045 0%, #0a0714 80%);
+  text-align: center;
+}
+
+.auth-logo-heart {
+  font-size: 4rem;
+  background: linear-gradient(135deg, #c084fc, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.6));
+  margin-bottom: 20px;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.auth-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+.input-box {
+  width: 100%;
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.input-box i {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.input-field {
+  width: 100%;
+  padding: 15px 18px 15px 46px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.input-field:focus {
+  border-color: var(--primary-glow);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+.btn-purple {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.social-strip {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0 16px;
+}
+
+.social-round {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #111;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* Stories */
+.stories-strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 4px 0 18px;
+  scrollbar-width: none;
+}
+.stories-strip::-webkit-scrollbar { display: none; }
+
+.story-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.story-ring-outer {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+}
+
+.story-ring-outer.add {
+  background: var(--border-line);
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  color: var(--primary-glow);
+}
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg-dark);
+}
+
+/* Post Composer Mini */
+.post-creator-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+.creator-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.creator-top input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border-line);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  color: white;
+  outline: none;
+}
+
+/* Feed Cards */
+.feed-post {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.post-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.user-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: white;
+  object-fit: cover;
+}
+
+.post-media-img {
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin: 10px 0;
+}
+
+.post-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 10px;
+  color: var(--text-muted);
+  font-size: 1.15rem;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.action-item.liked {
+  color: #ec4899;
+}
+
+/* Chat Screen */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 170px);
+}
+
+.chat-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-line);
+}
+
+.chat-bubble-stream {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 2px;
+}
+
+.chat-bubble {
+  max-width: 78%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-bubble.mine {
+  align-self: flex-end;
+  background: var(--bubble-me);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.other {
+  align-self: flex-start;
+  background: var(--bubble-them);
+  color: #f1f5f9;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border-line);
+}
+
+.bubble-clock {
+  font-size: 0.68rem;
+  opacity: 0.7;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.chat-bottom-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  padding: 10px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-line);
+}
+
+.chat-bottom-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+/* Profile Tab */
+.profile-banner {
+  height: 110px;
+  background: radial-gradient(circle at 75% 30%, #ec489944, transparent 40%), linear-gradient(135deg, #4c1d95, #1e123a);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.profile-details {
+  padding: 0 18px 20px;
+  position: relative;
+}
+
+.profile-avatar-big {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-card);
+  margin-top: -41px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  background: var(--primary);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.profile-stats-grid {
+  display: flex;
+  justify-content: space-around;
+  margin: 16px 0;
+  padding: 12px;
+  background: var(--bg-card-alt);
+  border-radius: var(--radius-sm);
+}
+
+.stat-cell {
+  text-align: center;
+}
+
+.stat-cell strong {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.stat-cell small {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Settings List Tiles */
+.settings-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-tile {
+  background: var(--bg-card);
+  padding: 15px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.tile-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.tile-left i {
+  color: var(--primary-glow);
+  width: 20px;
+}
+
+/* Bottom Bar */
+.dock-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 440px;
+  height: 72px;
+  background: rgba(13, 10, 24, 0.94);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-line);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+  padding: 0 10px;
+}
+
+.dock-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.dock-btn.active {
+  color: var(--primary-glow);
+}
+
+.dock-btn-add {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  font-size: 1.35rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.5);
+  cursor: pointer;
+}
+
+/* Toast */
+.toast-bar {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f8fafc;
+  color: #0f172a;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  z-index: 99;
+}
 </style>
 </head>
 <body>
-<header>✦ Connectly</header>
-<main>
-<div class="card">
-  <b>Welcome to Connectly</b>
-  <p class="small">Sign in, share posts and connect with friends.</p>
-  <p id="status">Connecting to Firebase...</p>
-</div>
 
-<section id="auth" class="card">
-  <h3>Create account / Login</h3>
-  <input id="email" type="email" placeholder="Email address" autocomplete="email">
-  <input id="password" type="password" placeholder="Password (6+ characters)" autocomplete="current-password">
-  <div class="row">
-    <button id="signup">Sign up</button>
-    <button id="login" class="secondary">Log in</button>
-  </div>
-  <button id="google" class="secondary">Continue with Google</button>
-</section>
+<div class="app-container">
 
-<section id="profile" class="card hidden">
-  <h3>Your profile</h3>
-  <p class="small">Username: 3–20 letters, numbers or underscores.</p>
-  <input id="username" placeholder="Choose a unique username">
-  <input id="displayName" placeholder="Display name (optional)" maxlength="40">
-  <button id="saveProfile">Save username</button>
-  <button id="logout" class="secondary">Log out</button>
-</section>
+  <!-- Screen 1: Auth Screen (Matches Screenshot 1 & 2) -->
+  <div id="authView" class="auth-wrap">
+    <i class="fa-solid fa-heart auth-logo-heart"></i>
+    <h1 class="auth-title">Connectly</h1>
+    <p class="auth-desc">Connect. Share. Express.</p>
 
-<section id="social" class="hidden">
-  <div class="card">
-    <h3>Find people</h3>
-    <input id="search" placeholder="Search exact username">
-    <button id="searchBtn">Search</button>
-    <div id="searchResults"></div>
-  </div>
+    <div id="authNotice" class="hidden" style="color:#fb7185;margin-bottom:12px;font-size:0.9rem;"></div>
 
-  <div class="card">
-    <h3>Messages</h3>
-    <p class="small">Enter the exact username of a Connectly user.</p>
-    <input id="chatUser" placeholder="Friend's username">
-    <button id="openChat">Open conversation</button>
-    <div id="chatBox" class="hidden">
-      <p id="chatTitle" class="small"></p>
-      <div id="messages" style="max-height:300px;overflow:auto"></div>
-      <textarea id="messageText" maxlength="2000" placeholder="Write a message..."></textarea>
-      <button id="sendMessage">Send message</button>
+    <div class="input-box hidden" id="signupNameBox">
+      <i class="fa-regular fa-user"></i>
+      <input type="text" id="signupName" class="input-field" placeholder="Display name">
+    </div>
+
+    <div class="input-box">
+      <i class="fa-regular fa-envelope"></i>
+      <input type="email" id="authEmail" class="input-field" placeholder="Email">
+    </div>
+
+    <div class="input-box">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="authPassword" class="input-field" placeholder="Password">
+    </div>
+
+    <button class="btn-purple" id="authSubmit" onclick="submitAuth()">Sign In</button>
+
+    <div style="margin:24px 0 12px;color:var(--text-muted);font-size:0.85rem;">or continue with</div>
+
+    <div class="social-strip">
+      <button class="social-round" onclick="googleSignIn()"><i class="fa-brands fa-google" style="color:#ea4335"></i></button>
+      <button class="social-round" onclick="toast('Apple sign in coming soon')"><i class="fa-brands fa-apple"></i></button>
+      <button class="social-round" onclick="toast('Facebook sign in coming soon')"><i class="fa-brands fa-facebook-f" style="color:#1877f2"></i></button>
+    </div>
+
+    <div style="font-size:0.88rem;color:var(--text-muted);margin-top:14px;">
+      <span id="authSwitchPrompt">New to Connectly?</span>
+      <span onclick="toggleAuthMode()" style="color:var(--primary-glow);font-weight:700;cursor:pointer;" id="authSwitchBtn">Create account</span>
     </div>
   </div>
 
-  <div class="card">
-    <h3>Create a post</h3>
-    <textarea id="postText" maxlength="2000" placeholder="What's on your mind?"></textarea>
-    <button id="createPost">Publish post</button>
+  <!-- Screen 2: Main App Shell -->
+  <div id="appView" class="hidden">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="brand-text">
+        <i class="fa-solid fa-heart" style="color:#a855f7;"></i> Connectly
+      </div>
+      <div class="top-icons">
+        <i class="fa-regular fa-paper-plane" onclick="navigate('messages')"></i>
+      </div>
+    </header>
+
+    <!-- 1. Feed Screen -->
+    <main id="feedScreen" class="screen-content">
+      <!-- Stories Bar -->
+      <div class="stories-strip">
+        <div class="story-pill" onclick="navigate('profile')">
+          <div class="story-ring-outer add">＋</div>
+          <span>Your story</span>
+        </div>
+        <div class="story-pill">
+          <div class="story-ring-outer"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120" class="story-img"></div>
+          <span>Ava</span>
+        </div>
+        <div class="story-pill">
+          <div class="story-ring-outer"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120" class="story-img"></div>
+          <span>Sneha</span>
+        </div>
+        <div class="story-pill">
+          <div class="story-ring-outer"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" class="story-img"></div>
+          <span>Rohit</span>
+        </div>
+      </div>
+
+      <!-- Quick Post Card -->
+      <div class="post-creator-card">
+        <div class="creator-top">
+          <div id="composerAvatar" class="user-avatar" style="width:36px;height:36px;">C</div>
+          <input type="text" id="postInputText" placeholder="What's on your mind?">
+          <button class="btn-purple" style="width:auto;padding:10px 16px;margin:0;" onclick="createPost()">Post</button>
+        </div>
+      </div>
+
+      <!-- Post Feed List -->
+      <div id="feedList">
+        <div style="text-align:center;padding:30px;color:var(--text-muted);">Loading posts...</div>
+      </div>
+    </main>
+
+    <!-- 2. Explore Screen -->
+    <section id="exploreScreen" class="screen-content hidden">
+      <div class="input-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="peopleSearch" class="input-field" placeholder="Search people..." oninput="filterPeople()">
+      </div>
+      <div id="peopleResults" style="display:flex;flex-direction:column;gap:12px;"></div>
+    </section>
+
+    <!-- 3. Messages / Chat Screen -->
+    <section id="messagesScreen" class="screen-content hidden">
+      <div id="chatContactsWrap">
+        <h3 style="margin-bottom:14px;">Recent Chats</h3>
+        <div id="chatContacts" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+
+      <div id="chatActiveWindow" class="chat-window hidden">
+        <div class="chat-nav-bar">
+          <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="closeActiveChat()"></i>
+          <div id="chatActiveAvatar" class="user-avatar" style="width:36px;height:36px;">U</div>
+          <div>
+            <strong id="chatActiveName" style="font-size:0.95rem;">User</strong>
+            <small style="display:block;color:#10b981;font-size:0.75rem;">Online</small>
+          </div>
+        </div>
+
+        <div class="chat-bubble-stream" id="messageStream"></div>
+
+        <div class="chat-bottom-input">
+          <input type="text" id="chatMessageInput" placeholder="Message..." onkeydown="if(event.key==='Enter')sendMessage()">
+          <i class="fa-solid fa-paper-plane" style="color:var(--primary-glow);cursor:pointer;" onclick="sendMessage()"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Notifications Screen -->
+    <section id="notifScreen" class="screen-content hidden">
+      <h3 style="margin-bottom:16px;">Notifications</h3>
+      <div class="settings-menu">
+        <div class="menu-tile">
+          <div class="tile-left">
+            <i class="fa-solid fa-heart" style="color:#ec4899;"></i>
+            <div>
+              <div>Sneha liked your post</div>
+              <small style="color:var(--text-muted);">2m ago</small>
+            </div>
+          </div>
+        </div>
+        <div class="menu-tile">
+          <div class="tile-left">
+            <i class="fa-solid fa-user-plus"></i>
+            <div>
+              <div>Rohit started following you</div>
+              <small style="color:var(--text-muted);">15m ago</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Profile Screen -->
+    <section id="profileScreen" class="screen-content hidden">
+      <div class="profile-card">
+        <div class="profile-banner"></div>
+        <div class="profile-details">
+          <div class="profile-avatar-big" id="profileAvatar">C</div>
+          <h2 id="profileDisplayName">User</h2>
+          <div style="color:var(--text-muted);font-size:0.88rem;" id="profileHandle">@username</div>
+          <p style="margin-top:8px;font-size:0.9rem;" id="profileBioText">Just a boy with big dreams 💜<br>Connect. Share. Express.</p>
+
+          <div class="profile-stats-grid">
+            <div class="stat-cell"><strong id="profilePostCount">0</strong><small>Posts</small></div>
+            <div class="stat-cell"><strong>12.4K</strong><small>Followers</small></div>
+            <div class="stat-cell"><strong>350</strong><small>Following</small></div>
+          </div>
+
+          <button class="btn-purple" style="margin-top:0;" onclick="openEditModal()">Edit Profile</button>
+        </div>
+      </div>
+
+      <div class="settings-menu">
+        <div class="menu-tile" onclick="openEditModal()">
+          <div class="tile-left"><i class="fa-regular fa-user"></i> Account Settings</div>
+          <i class="fa-solid fa-chevron-right" style="color:var(--text-muted);"></i>
+        </div>
+        <div class="menu-tile">
+          <div class="tile-left"><i class="fa-solid fa-shield-halved"></i> Privacy & Security</div>
+          <i class="fa-solid fa-chevron-right" style="color:var(--text-muted);"></i>
+        </div>
+        <div class="menu-tile" onclick="signOutUser()">
+          <div class="tile-left" style="color:#fb7185;"><i class="fa-solid fa-arrow-right-from-bracket" style="color:#fb7185;"></i> Log Out</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation Dock -->
+    <nav class="dock-nav">
+      <button class="dock-btn active" id="btn-feed" onclick="navigate('feed')"><i class="fa-solid fa-house"></i></button>
+      <button class="dock-btn" id="btn-explore" onclick="navigate('explore')"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <button class="dock-btn-add" onclick="navigate('feed');setTimeout(()=>$('postInputText').focus(),100)"><i class="fa-solid fa-plus"></i></button>
+      <button class="dock-btn" id="btn-notif" onclick="navigate('notif')"><i class="fa-regular fa-bell"></i></button>
+      <button class="dock-btn" id="btn-profile" onclick="navigate('profile')"><i class="fa-regular fa-user"></i></button>
+    </nav>
   </div>
-  <section id="feedBox" class="card">
-    <h3>Latest posts</h3>
-    <div id="feed">Loading posts...</div>
-  </section>
-</section>
-</main>
 
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <div id="toast" class="toast-bar hidden"></div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <script>
+// Firebase Config[span_14](start_span)[span_14](end_span)
 const firebaseConfig = {
-  apiKey: "AIzaSyBMgdqEMqA6H29VnGz6IAkyyMYPwdYL2pc",
-  authDomain: "connectly-37c0e.firebaseapp.com",
-  projectId: "connectly-37c0e",
-  storageBucket: "connectly-37c0e.firebasestorage.app",
-  messagingSenderId: "1001935844056",
-  appId: "1:1001935844056:web:353ac1fb57b52001be1dad",
-  measurementId: "G-S1LVJX8KSV"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-const $ = id => document.getElementById(id);
-let me = null, myProfile = null, activeChat = null, stopMessages = null;
-const say = msg => $("status").textContent = msg;
-const cleanUsername = s => s.trim().toLowerCase();
-const validUsername = s => /^[a-z0-9_]{3,20}$/.test(s);
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
-  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const timeText = ts => ts && ts.toDate ? ts.toDate().toLocaleString() : "Just now";
-
-$("signup").onclick = async () => {
-  try {
-    await auth.createUserWithEmailAndPassword($("email").value.trim(), $("password").value);
-  } catch(e) { say(e.message); }
-};
-$("login").onclick = async () => {
-  try {
-    await auth.signInWithEmailAndPassword($("email").value.trim(), $("password").value);
-  } catch(e) { say(e.message); }
-};
-$("google").onclick = async () => {
-  try {
-    await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  } catch(e) { say("Google login: " + e.message); }
-};
-$("logout").onclick = () => auth.signOut();
-
-auth.onAuthStateChanged(async user => {
-  me = user;
-  $("auth").classList.toggle("hidden", !!user);
-  $("profile").classList.toggle("hidden", !user);
-  $("social").classList.toggle("hidden", !user);
-  if (!user) {
-    myProfile = null;
-    say("Please sign in or create an account.");
-    $("feed").textContent = "Sign in to see posts.";
-    if (stopMessages) stopMessages();
-    return;
-  }
-  try {
-    const snap = await db.collection("users").doc(user.uid).get();
-    myProfile = snap.exists ? snap.data() : null;
-    $("username").value = myProfile?.username || "";
-    $("displayName").value = myProfile?.displayName || "";
-    say("Signed in as " + (user.email || user.uid));
-    loadFeed();
-  } catch(e) { say("Profile error: " + e.message); }
-});
-
-$("saveProfile").onclick = async () => {
-  if (!me) return;
-  const username = cleanUsername($("username").value);
-  const displayName = $("displayName").value.trim().slice(0,40);
-  if (!validUsername(username)) {
-    say("Username must be 3–20 characters: a-z, 0-9 or underscore.");
-    return;
-  }
-  try {
-    await db.runTransaction(async tx => {
-      const userRef = db.collection("users").doc(me.uid);
-      const newNameRef = db.collection("usernames").doc(username);
-      const current = await tx.get(userRef);
-      const nameSnap = await tx.get(newNameRef);
-      if (nameSnap.exists && nameSnap.data().uid !== me.uid)
-        throw new Error("Username already taken. Try another.");
-      const oldName = current.exists ? current.data().username : null;
-      if (oldName && oldName !== username) {
-        const oldRef = db.collection("usernames").doc(oldName);
-        tx.delete(oldRef);
-      }
-      tx.set(newNameRef, {uid: me.uid});
-      tx.set(userRef, {
-        username, displayName, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, {merge:true});
-    });
-    const snap = await db.collection("users").doc(me.uid).get();
-    myProfile = snap.data();
-    say("Profile saved! Your username is @" + username);
-  } catch(e) { say(e.message); }
-};
-
-$("searchBtn").onclick = async () => {
-  const name = cleanUsername($("search").value);
-  $("searchResults").textContent = "Searching...";
-  if (!validUsername(name)) {
-    $("searchResults").textContent = "Enter a valid exact username.";
-    return;
-  }
-  try {
-    const s = await db.collection("usernames").doc(name).get();
-    if (!s.exists) { $("searchResults").textContent = "User not found."; return; }
-    const p = await db.collection("users").doc(s.data().uid).get();
-    const u = p.data() || {};
-    $("searchResults").innerHTML =
-      "<p><b>@" + esc(u.username) + "</b> " + esc(u.displayName || "") + "</p>";
-  } catch(e) { $("searchResults").textContent = e.message; }
-};
-
-$("createPost").onclick = async () => {
-  if (!me || !myProfile?.username) {
-    say("Save your username first.");
-    return;
-  }
-  const text = $("postText").value.trim();
-  if (!text) { say("Write something first."); return; }
-  try {
-    await db.collection("posts").add({
-      uid: me.uid, username: myProfile.username,
-      text, createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    $("postText").value = "";
-    say("Post published!");
-    loadFeed();
-  } catch(e) { say("Could not publish: " + e.message); }
-};
-
-async function loadFeed() {
-  if (!me) return;
-  try {
-    const snap = await db.collection("posts").orderBy("createdAt","desc").limit(50).get();
-    const feed = $("feed");
-    feed.replaceChildren();
-    if (snap.empty) { feed.textContent = "No posts yet. Be the first!"; return; }
-    snap.forEach(doc => {
-      const p = doc.data(), id = doc.id;
-      const card = document.createElement("article");
-      card.className = "card";
-      card.innerHTML = "<b>@" + esc(p.username) + "</b><p class='small'>" +
-        esc(timeText(p.createdAt)) + "</p><p class='post'>" + esc(p.text) +
-        "</p><button class='secondary like'>♥ Like (" + (p.likesCount || 0) +
-        ")</button><div class='comments'></div><input class='commentText' maxlength='500' placeholder='Write a comment'><button class='secondary commentBtn'>Comment</button>";
-      card.querySelector(".like").onclick = async () => {
-        try {
-          const ref = db.collection("posts").doc(id);
-          const likeRef = ref.collection("likes").doc(me.uid);
-          await db.runTransaction(async tx => {
-            const s = await tx.get(likeRef);
-            const postSnap = await tx.get(ref);
-            if (!postSnap.exists) return;
-            const n = postSnap.data().likesCount || 0;
-            if (s.exists) { tx.delete(likeRef); tx.update(ref,{likesCount:Math.max(0,n-1)}); }
-            else { tx.set(likeRef,{uid:me.uid}); tx.update(ref,{likesCount:n+1}); }
-          });
-          loadFeed();
-        } catch(e) { say("Like failed: " + e.message); }
-      };
-      card.querySelector(".commentBtn").onclick = async () => {
-        const input = card.querySelector(".commentText");
-        const text = input.value.trim();
-        if (!text) return;
-        try {
-          await db.collection("posts").doc(id).collection("comments").add({
-            uid:me.uid, username:myProfile?.username || me.email || "user",
-            text, createdAt:firebase.firestore.FieldValue.serverTimestamp()
-          });
-          input.value = "";
-          showComments(id,card.querySelector(".comments"));
-        } catch(e) { say("Comment failed: " + e.message); }
-      };
-      feed.appendChild(card);
-      showComments(id,card.querySelector(".comments"));
-    });
-  } catch(e) { $("feed").textContent = "Feed error: " + e.message; }
-}
-
-async function showComments(postId, box) {
-  try {
-    const snap = await db.collection("posts").doc(postId)
-      .collection("comments").orderBy("createdAt","asc").limit(30).get();
-    box.replaceChildren();
-    snap.forEach(d => {
-      const c = d.data(), p = document.createElement("p");
-      p.className = "small";
-      p.textContent = "@" + (c.username || "user") + ": " + c.text;
-      box.appendChild(p);
-    });
-  } catch(e) { /* Security rules may not be configured yet. */ }
-}
-
-$("openChat").onclick = async () => {
-  if (!me || !myProfile?.username) { say("Save your username first."); return; }
-  const targetName = cleanUsername($("chatUser").value);
-  if (!validUsername(targetName)) { say("Enter a valid username."); return; }
-  try {
-    const s = await db.collection("usernames").doc(targetName).get();
-    if (!s.exists) { say("User not found."); return; }
-    const targetUid = s.data().uid;
-    if (targetUid === me.uid) { say("You cannot message yourself."); return; }
-    const ids = [me.uid,targetUid].sort();
-    activeChat = ids.join("_");
-    $("chatTitle").textContent = "Chat with @" + targetName;
-    $("chatBox").classList.remove("hidden");
-    if (stopMessages) stopMessages();
-    stopMessages = db.collection("chats").doc(activeChat).collection("messages")
-      .orderBy("createdAt","asc").limit(100).onSnapshot(snap => {
-        const box = $("messages");
-        box.replaceChildren();
-        snap.forEach(d => {
-          const m = d.data(), line = document.createElement("p");
-          line.textContent = (m.uid === me.uid ? "You: " : "Friend: ") + m.text;
-          line.style.padding = "8px";
-          box.appendChild(line);
-        });
-        box.scrollTop = box.scrollHeight;
-      }, e => say("Chat error: " + e.message));
-  } catch(e) { say(e.message); }
-};
-
-$("sendMessage").onclick = async () => {
-  if (!me || !activeChat) return;
-  const text = $("messageText").value.trim();
-  if (!text) return;
-  try {
-    await db.collection("chats").doc(activeChat).collection("messages").add({
-      uid:me.uid, text, createdAt:firebase.firestore.FieldValue.serverTimestamp()
-    });
-    $("messageText").value = "";
-  } catch(e) { say("Message failed: " + e.message); }
-};
-</script>
-</body>
-    </html>
-  
+  apiKey: "AIzaSyCYoH1l5iQ7zOQ9uS_YOUR_KEY",
+  authDomain: "connectly-37c0e.f
