@@ -1,13 +1,13 @@
 {
-  "background_color": "#ffffff",
+  "background_color": "#0b0b10",
   "dir": "ltr",
   "display": "standalone",
   "name": "Connectly",
   "orientation": "any",
-  "scope": "/",
-  "short_name": "connectly",
-  "start_url": "/",
-  "theme_color": "#0a0714",
-  "id": "connectly",
+  "scope": "/connectly-/",
+  "short_name": "Connectly",
+  "start_url": "/connectly-/",
+  "theme_color": "#0b0b10",
+  "id": "/connectly-/",
   "description": "Connect with friends, chat and share moments."
 }
