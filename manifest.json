@@ -1,13 +1,25 @@
 {
-  "background_color": "#0b0b10",
-  "dir": "ltr",
-  "display": "standalone",
-  "name": "Connectly",
-  "orientation": "any",
-  "scope": "/connectly-/",
-  "short_name": "Connectly",
-  "start_url": "/connectly-/",
-  "theme_color": "#0b0b10",
   "id": "/connectly-/",
-  "description": "Connect with friends, chat and share moments."
+  "name": "Connectly",
+  "short_name": "Connectly",
+  "description": "Connect with friends, chat and share moments.",
+  "start_url": "/connectly-/",
+  "scope": "/connectly-/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0714",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/connectly-/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/connectly-/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
