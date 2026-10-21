@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.mudassir1687.twa",
+      "sha256_cert_fingerprints": [
+        "6E:9D:4B:CB:DD:4C:2B:F2:75:81:B2:FA:15:BE:2D:18:FF:A9:4B:DC:25:DF:69:2D:27:2E:D5:9F:8D:95:41:DA"
+      ]
+    }
+  }
+]
